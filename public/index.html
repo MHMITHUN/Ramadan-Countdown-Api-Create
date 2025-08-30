@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ramadan Countdown API</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap"
+            rel="stylesheet">
+
+        <style>
+        :root {
+            --primary-color: #e0e0e0;
+            --secondary-color: #a0a0a0;
+            --background-start: #1a1a2e;
+            --background-end: #16222a;
+            --glass-bg: rgba(255, 255, 255, 0.07);
+            --glass-border: rgba(255, 255, 255, 0.15);
+            --button-bg-start: #8e2de2;
+            --button-bg-end: #4a00e0;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: var(--background-start);
+            background: radial-gradient(circle, var(--background-end), var(--background-start));
+            color: var(--primary-color);
+            overflow: hidden;
+        }
+
+        .container {
+            padding: 50px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 20px;
+            border: 1px solid var(--glass-border);
+            text-align: center;
+            max-width: 600px;
+            width: 90%;
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            font-size: 2.5em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            background: linear-gradient(90deg, #e0c3fc, #8ec5fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p {
+            font-size: 1.1em;
+            color: var(--secondary-color);
+            font-weight: 300;
+            margin-bottom: 30px;
+        }
+        
+        .domain-display {
+            background-color: rgba(0,0,0,0.3);
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 35px;
+            font-family: 'Courier New', Courier, monospace;
+            color: #a7d121;
+        }
+        
+        #domain-name {
+            font-weight: bold;
+        }
+
+        .api-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-image: linear-gradient(to right, var(--button-bg-start), var(--button-bg-end));
+            color: white;
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .api-button:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(142, 45, 226, 0.4);
+        }
+    </style>
+    </head>
+    <body>
+        <div class="container">
+            <h1>Ramadan Countdown API 🌙</h1>
+            <p>A simple, dynamic API to get the countdown for the next
+                Ramadan.</p>
+
+            <div class="domain-display">
+                Your Domain: <span id="domain-name">Loading...</span>
+            </div>
+
+            <a href="/api/countdown" class="api-button">Access API Data</a>
+        </div>
+
+        <script>
+
+        document.getElementById('domain-name').textContent = window.location.hostname;
+    </script>
+    </body>
+</html>
