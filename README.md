@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="https://raw.githubusercontent.com/MHMITHUN/Ramadan-Countdown-Create/main/public/favicon.ico" alt="Logo" width="80" height="80">
+  <img src="https://i.ibb.co.com/TMHzMMm2/logo-ramadan.jpg" alt="Logo" width="80" height="80">
   <h1 align="center">Ramadan Countdown 🌙</h1>
   <p align="center">
     A beautiful, modern, and dynamic web application that provides a live countdown to the next Ramadan, complete with a public API.
@@ -20,9 +20,8 @@ Experience the live countdown in action! This project features an elegant, respo
 **[https://ramadan-countdown-create.vercel.app/](https://ramadan-countdown-create.vercel.app/)**
 
 <a href="https://ramadan-countdown-create.vercel.app/" target="_blank">
-  <img src="https://i.imgur.com/example.png" alt="Ramadan Countdown Live Preview">
+  <img src="https://i.ibb.co.com/xSDM29pM/Screenshot-2025-08-30-155909.png" alt="Ramadan Countdown Live Preview">
 </a>
-*Note: Please replace the image URL above with a real screenshot of your project.*
 
 ---
 
