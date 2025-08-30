@@ -3,37 +3,36 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Countdown to Ramadan</title>
-
+        <title>Ramadan Countdown</title>
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link
-            href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Poppins:wght@300;400;600&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Lora:wght@500&family=Montserrat:wght@700&display=swap"
             rel="stylesheet">
 
         <style>
         :root {
-            --text-primary: #f0e6d2;
-            --text-secondary: #c8bda8;
-            --highlight-gold: #f7d488;
-            --bg-color: #0c0a1a;
-            --glass-bg: rgba(12, 10, 26, 0.6);
-            --glass-border: rgba(247, 212, 136, 0.2);
+            --text-primary: #f5f5f5;
+            --text-secondary: #b0b0b0;
+            --highlight-gold: #ffdf7e;
+            --bg-color: #0b0918;
+            --glass-bg: rgba(11, 9, 24, 0.55);
+            --glass-border: rgba(255, 223, 126, 0.2);
         }
 
         body {
-            font-family: 'Poppins', sans-serif;
+            font-family: 'Lora', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             margin: 0;
             background-color: var(--bg-color);
-            background-image: url('https://images.unsplash.com/photo-1542468922-7204968d2793?q=80&w=1887&auto=format&fit=crop');
+            background-image: url('https://images.unsplash.com/photo-1585252583373-dc95b2a215aa?q=80&w=1887&auto=format&fit=crop');
             background-size: cover;
             background-position: center;
             color: var(--text-primary);
-            overflow-x: hidden;
+            overflow: hidden;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -44,185 +43,267 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(12, 10, 26, 0.7);
+            background: linear-gradient(to top, rgba(11, 9, 24, 0.9), rgba(11, 9, 24, 0.6));
             z-index: 1;
+        }
+
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(11, 9, 24, 0.98);
+            z-index: 100;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            flex-direction: column;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
+            opacity: 1;
+            visibility: visible;
+        }
+
+        #preloader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-text {
+            font-size: 1.4em;
+            color: var(--text-secondary);
+            max-width: 500px;
+            line-height: 1.6;
+            animation: fadeIn 2s ease-out;
         }
 
         .container {
             position: relative;
             z-index: 2;
-            padding: 40px;
+            padding: 40px 50px;
             background: var(--glass-bg);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border-radius: 20px;
             border: 1px solid var(--glass-border);
             text-align: center;
-            max-width: 800px;
+            max-width: 850px;
             width: 100%;
             box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-            animation: fadeIn 1.5s ease-out;
         }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.9); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        h1 {
+        
+        .stylish-title {
             font-family: 'Cinzel Decorative', cursive;
-            font-size: 2.8em;
+            font-size: 1.8em;
             font-weight: 700;
             margin: 0 0 10px 0;
             color: var(--highlight-gold);
-            text-shadow: 0 0 15px rgba(247, 212, 136, 0.5);
+            text-shadow: 0 0 15px rgba(255, 223, 126, 0.5);
         }
 
-        p.subtitle {
-            font-size: 1.2em;
-            color: var(--text-secondary);
-            font-weight: 300;
-            margin-bottom: 40px;
+        h1 {
+            font-size: 2.5em;
+            font-weight: 500;
+            margin: 0 0 30px 0;
+            color: var(--text-primary);
         }
         
         #countdown-container {
             display: flex;
             justify-content: center;
+            align-items: flex-start;
             gap: 20px;
-            margin-bottom: 40px;
-            flex-wrap: wrap;
+            margin-bottom: 30px;
         }
 
-        .time-box {
-            background: rgba(0,0,0,0.2);
-            padding: 20px;
-            border-radius: 15px;
-            min-width: 120px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        .time-unit {
+            display: flex;
+            flex-direction: column;
         }
 
-        .time-box:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 10px 20px rgba(247, 212, 136, 0.1);
-        }
-
-        .time-box .number {
-            font-size: 3.5em;
-            font-weight: 600;
-            color: var(--highlight-gold);
-            line-height: 1;
-        }
-
-        .time-box .label {
+        .label {
+            font-family: 'Montserrat', sans-serif;
             font-size: 1em;
             color: var(--text-secondary);
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+        }
+
+        .number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 6em;
+            font-weight: 700;
+            color: var(--highlight-gold);
+            line-height: 1;
+            text-shadow: 0 0 20px rgba(255, 223, 126, 0.4);
+            transition: transform 0.3s ease;
+        }
+
+        .time-unit:hover .number {
+            transform: scale(1.1);
         }
         
+        #hijri-date-container {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 25px;
+        }
+        
+        #hijri-date {
+            color: var(--text-primary);
+            font-weight: bold;
+        }
+
+        .footer-text {
+            font-size: 1.1em;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+            margin-top: 0;
+        }
+        
+        #ramadan-date {
+            color: var(--highlight-gold);
+            font-weight: bold;
+        }
+
         .api-button {
             display: inline-block;
-            margin-top: 20px;
-            padding: 10px 20px;
+            padding: 8px 18px;
             background: transparent;
-            color: var(--highlight-gold);
+            color: var(--text-secondary);
             text-decoration: none;
             font-size: 0.9em;
-            font-weight: 400;
             border-radius: 8px;
-            border: 1px solid var(--highlight-gold);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            border: 1px solid var(--text-secondary);
+            transition: all 0.3s ease;
         }
 
         .api-button:hover {
             background-color: var(--highlight-gold);
             color: var(--bg-color);
+            border-color: var(--highlight-gold);
         }
         
- 
         @media (max-width: 768px) {
-            h1 { font-size: 2.2em; }
-            p.subtitle { font-size: 1em; }
-            .time-box { min-width: 100px; padding: 15px; }
-            .time-box .number { font-size: 2.5em; }
             .container { padding: 30px; }
+            .stylish-title { font-size: 1.5em; }
+            h1 { font-size: 2em; }
+            .label { font-size: 0.8em; }
+            .number { font-size: 4em; }
+            .footer-text, #hijri-date-container { font-size: 1em; }
+            #countdown-container { gap: 15px; }
         }
         @media (max-width: 480px) {
+            .preloader-text { font-size: 1.2em; }
+            .number { font-size: 2.5em; }
+            .stylish-title { font-size: 1.2em; }
+            h1 { font-size: 1.8em; margin-bottom: 30px; }
             #countdown-container { gap: 10px; }
-            .time-box { min-width: 70px; padding: 10px; }
-            .time-box .number { font-size: 2em; }
-            h1 { font-size: 1.8em; }
+            .label { font-size: 0.7em; letter-spacing: 2px; }
+            .footer-text { font-size: 0.9em; }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
     </style>
     </head>
     <body>
+        <div id="preloader">
+            <div class="preloader-text">
+                As you await the countdown, please take a moment to pray for me
+                and my family. Your duas are deeply appreciated.
+            </div>
+        </div>
         <div class="overlay"></div>
         <div class="container">
-            <h1>Time until Ramadan</h1>
-            <p class="subtitle">The blessed month is near, let's prepare
-                ourselves.</p>
+            <div class="stylish-title">Time until Ramadan</div>
+            <h1>Ramadan Countdown</h1>
 
             <div id="countdown-container">
-                <div class="time-box">
-                    <div id="days" class="number">...</div>
+                <div class="time-unit">
                     <div class="label">Days</div>
+                    <div id="days" class="number">...</div>
                 </div>
-                <div class="time-box">
-                    <div id="hours" class="number">...</div>
+                <div class="time-unit">
                     <div class="label">Hours</div>
+                    <div id="hours" class="number">...</div>
                 </div>
-                <div class="time-box">
-                    <div id="minutes" class="number">...</div>
+                <div class="time-unit">
                     <div class="label">Minutes</div>
+                    <div id="minutes" class="number">...</div>
                 </div>
-                <div class="time-box">
-                    <div id="seconds" class="number">...</div>
+                <div class="time-unit">
                     <div class="label">Seconds</div>
+                    <div id="seconds" class="number">...</div>
                 </div>
             </div>
+
+            <div id="hijri-date-container">
+                Today is: <span id="hijri-date">Loading...</span>
+            </div>
+
+            <p class="footer-text">Ramadan will, inshaAllah, be coming on <span
+                    id="ramadan-date">...</span> 🌙✨ <span>let's prepare
+                    ourselves.</span></p>
 
             <a href="/api/countdown" class="api-button" target="_blank">View API
                 Data</a>
         </div>
 
         <script>
-  
         const daysEl = document.getElementById('days');
         const hoursEl = document.getElementById('hours');
         const minutesEl = document.getElementById('minutes');
         const secondsEl = document.getElementById('seconds');
+        const ramadanDateEl = document.getElementById('ramadan-date');
+        const hijriDateEl = document.getElementById('hijri-date');
+        const preloaderEl = document.getElementById('preloader');
 
-        async function startCountdown() {
+        async function initializePage() {
+            const startTime = Date.now();
+            const minimumDisplayTime = 5000;
+
             try {
-        
-                const response = await fetch('/api/countdown');
-                const data = await response.json();
-                
-                let { days, hours, minutes, seconds } = data.countdown;
+                const today = new Date();
+                const dateForAPI = `${today.getDate()}-${today.getMonth() + 1}-${today.getFullYear()}`;
+                const hijriApiUrl = `https://api.aladhan.com/v1/gToH?date=${dateForAPI}`;
 
-           
+                const [ramadanResponse, hijriResponse] = await Promise.all([
+                    fetch('/api/countdown'),
+                    fetch(hijriApiUrl)
+                ]);
+
+                const ramadanData = await ramadanResponse.json();
+                const hijriData = await hijriResponse.json();
+                
+                const dateObject = new Date(ramadanData.ramadanStartDate);
+                const options = { year: 'numeric', month: 'long', day: 'numeric' };
+                const formattedDate = dateObject.toLocaleDateString('en-US', options);
+                ramadanDateEl.textContent = formattedDate;
+
+                const hijri = hijriData.data.hijri;
+                hijriDateEl.textContent = `${hijri.day} ${hijri.month.en}, ${hijri.year} AH`;
+
+                let { days, hours, minutes, seconds } = ramadanData.countdown;
+
                 const timerInterval = setInterval(() => {
                     seconds--;
-                    if (seconds < 0) {
-                        seconds = 59;
-                        minutes--;
-                    }
-                    if (minutes < 0) {
-                        minutes = 59;
-                        hours--;
-                    }
-                    if (hours < 0) {
-                        hours = 23;
-                        days--;
-                    }
+                    if (seconds < 0) { seconds = 59; minutes--; }
+                    if (minutes < 0) { minutes = 59; hours--; }
+                    if (hours < 0) { hours = 23; days--; }
+                    
                     if (days < 0) {
-                     
                         clearInterval(timerInterval);
                         document.getElementById('countdown-container').innerHTML = "<h2>Ramadan Mubarak!</h2>";
                         return;
                     }
                     
-      
                     daysEl.textContent = days;
                     hoursEl.textContent = String(hours).padStart(2, '0');
                     minutesEl.textContent = String(minutes).padStart(2, '0');
@@ -232,11 +313,22 @@
 
             } catch (error) {
                 console.error("Failed to fetch API data:", error);
-                document.getElementById('countdown-container').textContent = "Error loading countdown.";
+                document.getElementById('countdown-container').innerHTML = "Error loading countdown.";
+            } finally {
+                const elapsedTime = Date.now() - startTime;
+                const remainingTime = minimumDisplayTime - elapsedTime;
+
+                if (remainingTime > 0) {
+                    setTimeout(() => {
+                        preloaderEl.classList.add('hidden');
+                    }, remainingTime);
+                } else {
+                    preloaderEl.classList.add('hidden');
+                }
             }
         }
         
-        startCountdown();
+        initializePage();
     </script>
     </body>
 </html>
